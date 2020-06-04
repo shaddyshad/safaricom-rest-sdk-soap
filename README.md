@@ -1,4 +1,5 @@
 # safaricom-rest-sdk-soap
+## In development, dont use in production.
 Mpesa Soap rest boilerplate sdks for javascript
 
 > Provid access to safaricom mpesa sdk using SOAP adapters
