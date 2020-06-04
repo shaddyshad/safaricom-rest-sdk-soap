@@ -1,7 +1,7 @@
 {
-  "name": "soapsc",
+  "name": "safaricom-rest-sdk-soap",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mpesa soap rest sdks for javascript",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

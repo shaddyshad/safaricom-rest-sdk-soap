@@ -8,6 +8,7 @@
  * + SERVICE_ID - service id issued by safaricom
  * + INITIATOR_NAME - name of initiator
  * + SECURITY_CREDENTIALS - encyrpted initiator service
+ * +PAYMENTS_SERVICE_PASSWORD - service password
  */
 module.exports = (soapClient) => (getCurrentTime, encodePassword) => {
     // get result url from environment

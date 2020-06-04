@@ -32,7 +32,8 @@ PAYMENTS_SERVICE_PASSWORD=PAYMENTS SERVICE PASSWORD
 > **Note** Ensure you `ignore` the `.env` file by adding `.env` to `.gitignore`
 
 ## Usage
-Import the module you require 
+This is a boilerplate, so to use it you have to write your source in the created`index.js` file.
+Import the module you require from `index.js` as the main entry file
 #### Modules
 
 ##### MobileB2C
