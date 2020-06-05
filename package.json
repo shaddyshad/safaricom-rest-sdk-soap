@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "cuid": "^2.1.8",
     "dotenv": "^8.2.0",
     "js-base64": "^2.5.2",
