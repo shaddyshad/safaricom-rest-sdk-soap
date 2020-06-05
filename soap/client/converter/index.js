@@ -18,7 +18,7 @@ module.exports = converter =>  b2cPayload => {
         "soapenv:Envelope":{
             _attributes: {
                 "xmlns:soapenv": "http://schemas.xmlsoap.org/soap/envelope",
-                "xmlns:req": "http://api-v1.gen.mm.vodafone.com/mminterface/request"
+                "xmlns:req": `${process.env.PROVIDER_URL}/mminterface/request`
             },
             "soapenv::Header": {
                 ...compiledHeaders
