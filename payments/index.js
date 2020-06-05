@@ -21,9 +21,9 @@ const makeB2C = require('./b2c');
  * Get formatted timestamp
  */
 function getCurrentTime(){
-    return moment().format()
+    return moment().format('YYYYMMDDHHmmSS')
 }
- 
+
 
 /**
  * Encode a list of given arguments into a password
