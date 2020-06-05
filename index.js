@@ -1,4 +1,4 @@
-require('dotenv').config
+require('dotenv').config()
 const {b2c} = require('./payments')
 
 // make a b2c

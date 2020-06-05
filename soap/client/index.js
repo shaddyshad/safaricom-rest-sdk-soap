@@ -5,12 +5,13 @@ const axios = require('axios')
 const json2Soap = makeConverter(xmljs);
 
 const PROVIDER_URL = process.env.PROVIDER_URL;
-
+console.log(PROVIDER_URL)
 // create an axios instance
 const api = axios.create({
     baseUrl: PROVIDER_URL,
     timeout: 1000
 })
+console.log(api)
 
 
 /**
@@ -24,9 +25,9 @@ async function postB2C(transaction){
         'Content-Type': 'application/xml'
     }
 
-    return api.post('/mminterface/request', headers, body)
-        .then(console.log)
-        .catch(console.log)
+    const res = await api.post('/mminterface/request', headers, body)
+
+    return res
 }
 
 
