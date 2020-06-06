@@ -11,7 +11,7 @@ const api = axios.create({
     baseUrl: PROVIDER_URL,
     timeout: 1000
 })
-console.log(api)
+
 
 
 /**
@@ -26,7 +26,7 @@ async function postB2C(transaction){
     }
 
     const res = await api.post('/mminterface/request', headers, body)
-
+    console.log(res)
     return res
 }
 
