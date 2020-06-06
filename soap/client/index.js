@@ -25,7 +25,7 @@ async function postB2C(transaction){
         'Content-Type': 'application/xml'
     }
 
-    const res = await api.post(`${PROVIDER_URL}/mminterface/request`, headers, body)
+    const res = await api.post(`${PROVIDER_URL}/mminterface/request`, body, {headers})
     return res
 }
 
