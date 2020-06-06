@@ -4,8 +4,8 @@ const {b2c} = require('./payments')
 // make a b2c
 const tx = {
     amount: 100,
-    idNum: '2187213',
-    recipient: '34234300327',
+    idNum: '33670739',
+    recipient: '254795877416',
     commandId: 1
 }
 
