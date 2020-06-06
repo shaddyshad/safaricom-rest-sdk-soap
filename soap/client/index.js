@@ -26,7 +26,6 @@ async function postB2C(transaction){
     }
 
     const res = await api.post('/mminterface/request', headers, body)
-    console.log(res.headers)
     return res
 }
 

@@ -9,4 +9,4 @@ const tx = {
     commandId: 1
 }
 
-b2c.initiateB2C(tx)
+b2c.initiateB2C(tx).catch( console.log)
