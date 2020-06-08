@@ -11,7 +11,7 @@ const Id = require('../id')
 // provider
 const makeProvider = require('./provider')
 
-const provider = withClient(makeProvider)(getCurrentTime, encodePassword)
+const provider = withClient(makeProvider)(getCurrentTime, encodePassword, encodeInitiatorPassword)
 
 // b2c 
 const makeB2C = require('./b2c');
