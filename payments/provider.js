@@ -87,20 +87,11 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
                     securityCredentials: SECURITY_CREDENTIALS,
                     shortCode: SHORT_CODE,
                 },
-                primaryParty: {
-                    identifierType: PRIMARY_IDENTIFIER_TYPE,
-                    identifier: SHORT_CODE,
-                },
                 receiverParty: {
                     identifierType: RECEIVER_IDENTIFIER_TYPE,
                     identifier: recipient
                 },
-                accessDevice: {
-                    identifierType: ACCESS_DEVICE_IDENTIFIER_TYPE,
-                    identifier: 1
-                }
             },
-            keyOwner: KEY_OWNER
         }
     }
 
