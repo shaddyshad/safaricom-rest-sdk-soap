@@ -37,7 +37,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
     // initiator name
     const INITIATOR_NAME = process.env.INITIATOR_NAME;
 
-    const SECURITY_CREDENTIALS = encodeInitiatorPassword(process.env.SECURITY_CREDENTIALS);
+    const SECURITY_CREDENTIALS = getInitiatorPassword();
 
     // key owner
     const KEY_OWNER = 1;
@@ -126,7 +126,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
      * Get Initiator Password
      */
     function getInitiatorPassword(initiatorPassword){
-        return 
+        return encodeInitiatorPassword(initiatorPassword)
     }   
     /**
      * Sends a b2c request to the registered soap client
