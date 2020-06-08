@@ -10,7 +10,7 @@
  * + SECURITY_CREDENTIALS - encyrpted initiator service
  * +PAYMENTS_SERVICE_PASSWORD - service password
  */
-module.exports = (soapClient) => (getCurrentTime, encodePassword) => {
+module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiatorPassword) => {
     // get result url from environment
     const RESULT_URL = process.env.RESULT_URL;
 
@@ -37,7 +37,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword) => {
     // initiator name
     const INITIATOR_NAME = process.env.INITIATOR_NAME;
 
-    const SECURITY_CREDENTIALS = process.env.SECURITY_CREDENTIALS;
+    const SECURITY_CREDENTIALS = encodeInitiatorPassword(process.env.SECURITY_CREDENTIALS);
 
     // key owner
     const KEY_OWNER = 1;
@@ -122,6 +122,12 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword) => {
         return encodePassword(SPID, PASSWORD, timestamp)
     }
 
+    /***
+     * Get Initiator Password
+     */
+    function getInitiatorPassword(initiatorPassword){
+        return 
+    }   
     /**
      * Sends a b2c request to the registered soap client
      */
