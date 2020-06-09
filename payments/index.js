@@ -49,7 +49,7 @@ function encodeInitiatorPassword(InitiatorPassword){
 }
 
 // export b2c
-const b2c = makeB2C(provider, Id, getCurrentTime)
+const b2c = makeB2C(provider, Id)
 
 module.exports = {
     b2c
