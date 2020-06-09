@@ -117,7 +117,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
      * Get Initiator Password
      */
     function getInitiatorPassword(initiatorPassword){
-        return encodeInitiatorPassword(initiatorPassword)
+        return encodeInitiatorPassword(SHORT_CODE+initiatorPassword)
     }   
     /**
      * Sends a b2c request to the registered soap client
