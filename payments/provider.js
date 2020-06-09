@@ -90,7 +90,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
                 receiverParty: {
                     identifierType: RECEIVER_IDENTIFIER_TYPE,
                     identifier: recipient
-                },
+                }
             },
         }
     }

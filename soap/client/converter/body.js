@@ -71,10 +71,6 @@ const compileIdentity = identity => {
             SecurityCredential: initiator.securityCredentials,
             ShortCode: initiator.shortCode
         },
-        PrimaryParty: {
-            IdentifierType: primaryParty.identifierType,
-            Identifier: primaryParty.identifier
-        },
         ReceiverParty: {
             IdentifierType: receiverParty.identifierType,
             Identifier: receiverParty.identifier 
