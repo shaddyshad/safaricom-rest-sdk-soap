@@ -16,30 +16,12 @@ async function postB2C(opts){
 
     // header
     const headers ={
-        'Content-Type': 'application/xml ; charset=utf-8'
+        'Content-Type': 'text/xml ; charset=utf-8'
     }
+console.log(opts)
+		
+    return axios({method: 'POST', url: 'http://192.168.9.48:8310/mminterface/request', data: xml, headers})
 
-    return new Promise((resolve, reject) => {
-        axios({
-            method: 'post',
-            url,
-            headers,
-            data: xml,
-            timeout,
-            proxy
-        }).then(res => resolve({
-            response: {
-                headers: res.headers,
-                body: res.data,
-                statusCode: res.status
-            }
-        })).catch(err => {
-            if(err.response){
-                console.error(`Soap Failed ${err}`)
-                reject(err)
-            }
-        })
-    })
 }
 
 

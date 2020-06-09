@@ -77,7 +77,8 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
             callerPassword: CALLER_PASSWORD,
             SpPassword: getPassword(timestamp),
             serviceId: SERVICE_ID,
-            originatorConversationId
+            originatorConversationId,
+		SPID
         }
 
         // compile into wsdl
