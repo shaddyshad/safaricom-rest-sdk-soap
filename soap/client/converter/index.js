@@ -12,7 +12,7 @@ module.exports = converter =>  b2cPayload => {
 
     // compile the body 
     const body = compileBody(b2cPayload.body);
-
+    console.log(body)
     // compile   
     return converter.json2xml({
         "soapenv:Envelope":{
