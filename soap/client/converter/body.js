@@ -74,10 +74,6 @@ const compileIdentity = identity => {
         ReceiverParty: {
             IdentifierType: receiverParty.identifierType,
             Identifier: receiverParty.identifier 
-        },
-        AccessDevice: {
-            IdentifierType: accessDevice.identifier,
-            Indetifier: accessDevice.identifier
         }
     }
 }
