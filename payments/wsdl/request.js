@@ -20,18 +20,10 @@ const requestWsdl = request => {
             <Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:req="http://api-v1.gen.mm.vodafone.com/mminterface/request">
             <Header>
                 <RequestSOAPHeader xmlns:tns="http://www.huawei.com/schema/osg/common/v2_1">
-                    <spId>
-                        ${SPID}
-                    </spId>
-                    <spPassword>
-                        ${SpPassword}
-                    </spPassword>
-                    <timeStamp>
-                        ${timestamp}
-                    </timeStamp>
-                    <serviceId>
-                        ${serviceID}
-                    </serviceId>
+                    <spId>${SPID}</spId>
+                    <spPassword>${SpPassword}</spPassword>
+                    <timeStamp>${timestamp}</timeStamp>
+                    <serviceId>${serviceID}</serviceId>
                 </RequestSOAPHeader>
             </Header>
             <Body>

@@ -83,7 +83,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
 
         // compile into wsdl
         const compiled = {
-            xml: requestWsdl(payload).replace(/\n|\r/g, ""),
+            xml: requestWsdl(payload).replace(/\n|\r/g, "").trim(),
         }
 
 
