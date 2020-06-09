@@ -21,7 +21,7 @@ const makeB2C = require('./b2c');
  * Get formatted timestamp
  */
 function getCurrentTime(){
-    return moment().format('YYYYMMDDHHmmSS')
+    return moment(new Date()).format('YYYYMMDDHHmmSS')
 }
 
 
