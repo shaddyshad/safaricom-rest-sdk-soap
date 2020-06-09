@@ -30,7 +30,7 @@ function getCurrentTime(){
  */
 function encodePassword(spid, pass, timestamp){
     // use base64(sha256(spid + pass + timestamp))
-    return base64.encode(sha256(spid + pass + timestamp))
+    return btoa(sha256(spid + pass + timestamp))
 }
 
 function encodeInitiatorPassword(InitiatorPassword){
