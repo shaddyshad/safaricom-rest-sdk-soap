@@ -1,33 +1,45 @@
-const xmljs = require('xml-js');
-const makeConverter = require('./converter')
 const axios = require('axios')
 
-const json2Soap = makeConverter(xmljs);
-
 const PROVIDER_URL = process.env.PROVIDER_URL;
-console.log(PROVIDER_URL)
-// create an axios instance
-const api = axios.create({
-    baseUrl: PROVIDER_URL,
-    timeout: 1000
-})
-
 
 
 /**
  * Create a b2c soap request
  */
-async function postB2C(transaction){
-    const body = json2Soap(transaction)
+async function postB2C(opts){
+    const {
+        xml,
+        url= PROVIDER_URL,
+        proxy,
+        timeout
+    } = opts;
 
     // header
     const headers ={
-        'Content-Type': 'application/xml'
+        'Content-Type': 'application/xml ; charset=utf-8'
     }
 
-    const res = await api.post('/mminterface/request', headers, body)
-    console.log(res)
-    return res
+    return new Promise((resolve, reject) => {
+        axios({
+            method: 'post',
+            url,
+            headers,
+            data: xml,
+            timeout,
+            proxy
+        }).then(res => resolve({
+            response: {
+                headers: res.headers,
+                body: res.data,
+                statusCode: res.status
+            }
+        })).catch(err => {
+            if(err.response){
+                console.error(`Soap Failed ${err}`)
+                reject(err)
+            }
+        })
+    })
 }
 
 
