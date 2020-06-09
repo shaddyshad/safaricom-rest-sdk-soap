@@ -74,7 +74,9 @@ axios({
         'content-type': 'application/xml; charset=utf-8'
     },
     data: payload
-}).then(console.log)
+}).then(r => {
+    console.log("Response ", r.data)
+})
 .catch(err => {
     console.log(err.response)
 })
