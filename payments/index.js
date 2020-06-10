@@ -21,6 +21,7 @@ const makeB2C = require('./b2c');
  * Get formatted timestamp
  */
 function getCurrentTime(){
+    console.log(moment(new Date()).format('YYYYMMDDHHmmSS'))
     return moment(new Date()).format('YYYYMMDDHHmmSS')
 }
 
@@ -32,7 +33,9 @@ function encodePassword(spid, pass, timestamp){
     // use base64(sha256(spid + pass + timestamp))
     const Hashes = require('jshashes');
     const sha256 = new Hashes.SHA256()
-    const shaData = Buffer.from(sha256.hex_hmac(spid+pass+timestamp), 'utf-8').toString('base64');
+    const sha =  sha256.hex_hmac(spid+pass+timestamp)
+    console.log(sha);
+    const shaData = base64.encode(sha);
     console.log(shaData)
     return shaData;
 }
