@@ -30,10 +30,11 @@ function getCurrentTime(){
  */
 function encodePassword(spid, pass, timestamp){
     // use base64(sha256(spid + pass + timestamp))
-    const hash = crypto.createHash('sha256')
-                   .update(spid + pass + timestamp)
-                   .digest('base64');
-    return hash;
+    const Hashes = require('jshashes');
+    const sha256 = new Hashes.SHA256()
+    const shaData = Buffer.from(sha256.hex_hmac(spid+pass+timestamp), 'utf-8').toString('base64');
+    console.log(shaData)
+    return shaData;
 }
 
 function encodeInitiatorPassword(InitiatorPassword){
