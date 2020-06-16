@@ -30,11 +30,11 @@ function getCurrentTime(){
  * Encode a list of given arguments into a password
  */
 function encodePassword(spid, pass, timestamp){
-    // use base64(sha256(spid + pass + timestamp))
-    const Hashes = require('jshashes');
-    const sha256 = new Hashes.SHA256()
-    const sha =  sha256.hex_hmac(spid+pass+timestamp)
-    console.log(sha);
+    console.log(spid+pass+timestamp)
+	// use base64(sha256(spid + pass + timestamp))
+    //const sha256 = new Hashes.SHA256()
+    const sha =  sha256(spid+pass+timestamp)
+   console.log(sha)
     const shaData = base64.encode(sha);
     console.log(shaData)
     return shaData;
@@ -59,5 +59,6 @@ function encodeInitiatorPassword(InitiatorPassword){
 const b2c = makeB2C(provider, Id)
 
 module.exports = {
-    b2c
+    b2c,
+	encodePassword
 }

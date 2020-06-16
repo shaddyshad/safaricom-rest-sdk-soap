@@ -36,6 +36,6 @@ module.exports = (paymentsService, Id) => {
         const shortCode = provider.shortCode()
         const businessName = process.env.BUSINESS_NAME
 
-        return `${shortCode}_${businessName}_${unique}`
+        return `${unique}`
     }
 }

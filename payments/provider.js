@@ -1,4 +1,4 @@
-const requestWsdl = require('./wsdl/request')
+const requestWsdl = require('./wsdl/b2crequest')
 /**
  * Keeps constants needed to connect to service provider and provides it to all services
  * 
@@ -30,7 +30,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
 
     const CALLER_PASSWORD = process.env.CALLER_PASSWORD;
 
-    const SECURITY_CREDENTIALS = getInitiatorPassword();
+    const SECURITY_CREDENTIALS = process.env.SECURITY_CREDENTIALS;
 
     return Object.freeze({
         resultUrl: () => RESULT_URL,
@@ -83,7 +83,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
 
         // compile into wsdl
         const compiled = {
-            xml: requestWsdl(payload).replace(/\n|\r/g, "").trim(),
+            xml: requestB2CWsdl(payload).replace(/\n|\r/g, "").trim(),
         }
 
 

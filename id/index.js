@@ -1,5 +1,5 @@
-const cuid = require('cuid')
+const uuid = require('uuid4')
 
 module.exports = Object.freeze({
-    makeId: () => cuid()
+    makeId: () => uuid()
 })

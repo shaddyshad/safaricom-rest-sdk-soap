@@ -1,4 +1,6 @@
 const axios = require('axios')
+const https = require('https')
+const fs = require('fs')
 
 const PROVIDER_URL = process.env.PROVIDER_URL;
 
@@ -8,19 +10,27 @@ const PROVIDER_URL = process.env.PROVIDER_URL;
  */
 async function postB2C(opts){
     const {
-        xml,
-        url= PROVIDER_URL,
-        proxy,
-        timeout
+        xml
     } = opts;
+    const ca = fs.readFileSync('/home/pesamobie/safaricom-rest-sdk-soap/certs/Root.crt')
 
-    // header
-    const headers ={
-        'Content-Type': 'text/xml ; charset=utf-8'
+    const httpsAgent = new https.Agent({
+        ca,
+        rejectUnauthorized: false
+    });
+
+    
+    const options = {
+        method: 'POST',
+        url: 'https://192.168.9.48:18423/mminterface/request',
+        data: xml,
+        headers: {'Content-Type': 'text/xml; charset=utf-8'},
+            httpsAgent : httpsAgent
     }
-console.log(opts)
-		
-    return axios({method: 'POST', url: 'http://192.168.9.48:8310/mminterface/request', data: xml, headers})
+
+    const res = await axios(options)
+    
+    return res;
 
 }
 
