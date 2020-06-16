@@ -8,11 +8,12 @@ const PROVIDER_URL = process.env.PROVIDER_URL;
 /**
  * Create a b2c soap request
  */
-async function postB2C(opts){
+async function postTransaction(opts){
     const {
-        xml
+        xml,
+        caFilePath='/home/pesamobie/safaricom-rest-sdk-soap/certs/Root.crt'   // filepath to the cerficate
     } = opts;
-    const ca = fs.readFileSync('/home/pesamobie/safaricom-rest-sdk-soap/certs/Root.crt')
+    const ca = fs.readFileSync(caFilePath)
 
     const httpsAgent = new https.Agent({
         ca,
@@ -22,7 +23,7 @@ async function postB2C(opts){
     
     const options = {
         method: 'POST',
-        url: 'https://192.168.9.48:18423/mminterface/request',
+        url: `${PROVIDER_URL}/mminterface/request`,
         data: xml,
         headers: {'Content-Type': 'text/xml; charset=utf-8'},
             httpsAgent : httpsAgent
@@ -37,5 +38,5 @@ async function postB2C(opts){
 
 
 module.exports = Object.freeze({
-    postB2C
+    postTransaction
 })
