@@ -72,5 +72,6 @@ const b2c = makeB2C(provider, originatorId)
 
 module.exports = {
     b2c,
-	encodePassword
+    encodePassword,
+    b2b
 }
