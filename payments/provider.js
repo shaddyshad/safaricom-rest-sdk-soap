@@ -32,10 +32,15 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
 
     const SECURITY_CREDENTIALS = process.env.SECURITY_CREDENTIALS;
 
+    // requester phone number required for b2b
+    const PHONE_NUMBER = process.env.PHONE_NUMBER;
+
     return Object.freeze({
+        makeB2C,
+        makeB2B,
+        // utilities
         resultUrl: () => RESULT_URL,
         timeoutUrl: () => QUEUE_TIMEOUT_URL,
-        makeB2C,
         shortCode: () => SHORT_CODE
     })
 
@@ -58,17 +63,51 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
      * Sends a b2c request to the registered soap client
      */
     async function makeB2C(transaction){
+        const payload = composeTransaction(transaction)
+
+        // compile into wsdl
+        const compiled = {
+            xml: requestB2CWsdl(payload).replace(/\n|\r/g, "").trim(),
+        }
+
+
+        return soapClient.postTransaction(compiled)
+    }
+
+    /**
+     * Perform a b2b request
+     */
+    async function makeB2B(transaction){
+        //attach b2b information
+        const payload = {
+            ...composeTransaction(transaction),
+            requesterPhoneNumber: PHONE_NUMBER
+        };
+
+        // compile into wsdl
+        const compiled = {
+            xml: requestB2CWsdl(payload).replace(/\n|\r/g, "").trim(),
+        }
+
+
+        return soapClient.postTransaction(compiled)
+    }
+
+    /**
+     * Perform a specified transaction
+     */
+    function composeTransaction(transaction){
         const {
-            recipient, amount, originatorConversationId
+             amount, originatorConversationId, recipient
         } = transaction;
-        // compile the transaction
-       
+
+
         const timestamp = getCurrentTime();
 
         const payload = {
             timestamp,
             localTimestamp: timestamp,
-            amount,
+            amount, 
             recipient,
             timeoutUrl: QUEUE_TIMEOUT_URL,
             resultUrl: RESULT_URL,
@@ -78,15 +117,11 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
             SpPassword: getPassword(timestamp),
             serviceId: SERVICE_ID,
             originatorConversationId,
-		SPID
-        }
-
-        // compile into wsdl
-        const compiled = {
-            xml: requestB2CWsdl(payload).replace(/\n|\r/g, "").trim(),
+		    SPID
         }
 
 
-        return soapClient.postB2C(compiled)
+        return payload;
+        
     }
 }

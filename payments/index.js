@@ -30,13 +30,11 @@ function getCurrentTime(){
  * Encode a list of given arguments into a password
  */
 function encodePassword(spid, pass, timestamp){
-    console.log(spid+pass+timestamp)
 	// use base64(sha256(spid + pass + timestamp))
     //const sha256 = new Hashes.SHA256()
     const sha =  sha256(spid+pass+timestamp)
-   console.log(sha)
     const shaData = base64.encode(sha);
-    console.log(shaData)
+    
     return shaData;
 }
 
@@ -55,8 +53,22 @@ function encodeInitiatorPassword(InitiatorPassword){
     
 }
 
+/**
+ * Originator id - (SHORT_CODE_NAME_UNIQUE)
+ */
+const makeOriginatorId = (provider) => () => {
+    const unique = Id.makeId()
+    const shortCode = provider.shortCode()
+    const businessName = process.env.BUSINESS_NAME
+
+    return `${shortCode}_${businessName}_${unique}`
+}
+
+// initialize originator id with the provider 
+const originatorId = makeOriginatorId(provider);
+
 // export b2c
-const b2c = makeB2C(provider, Id)
+const b2c = makeB2C(provider, originatorId)
 
 module.exports = {
     b2c,

@@ -1,4 +1,4 @@
-module.exports = (paymentsService, Id) => {
+module.exports = (paymentsService, originatorId) => {
 
     return Object.freeze({
         initiateB2C,   // intiate a new b2c connection
@@ -15,7 +15,7 @@ module.exports = (paymentsService, Id) => {
         const provider = paymentsService;
 
         // generate a new originator conversationid 
-        const originatorConversationId = makeOriginatorId(provider)
+        const originatorConversationId = originatorId()
         // get transaction details from options
         const {amount, recipient} = options;
 
@@ -28,14 +28,5 @@ module.exports = (paymentsService, Id) => {
         return provider.makeB2C(payload)
     }
 
-    /**
-     * Originator id - (SHORT_CODE_NAME_UNIQUE)
-     */
-    function makeOriginatorId(provider){
-        const unique = Id.makeId()
-        const shortCode = provider.shortCode()
-        const businessName = process.env.BUSINESS_NAME
-
-        return `${unique}`
-    }
+    
 }
