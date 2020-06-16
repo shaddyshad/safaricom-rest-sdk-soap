@@ -7,6 +7,9 @@ const tx = {
     recipient: '254795877416',
 }
 
+// make b2b 
+
+
 
 //console.log(encodePassword('107031', 'Safaricom123!', '20190910115015'))
 

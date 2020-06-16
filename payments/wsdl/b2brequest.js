@@ -1,3 +1,5 @@
+const id = require("../../id");
+
 const b2bRequestWsdl = request => {
     // required all
     const {
@@ -16,8 +18,10 @@ const b2bRequestWsdl = request => {
         securityCredentials,
         shortCode,
         recipient,
-        requesterPhoneNumber
+        requesterPhoneNumber,
     } = request;
+
+    const convertationId = id.makeId();
 
     return (    `
             <Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:req="http://api-v1.gen.mm.vodafone.com/mminterface/request">
@@ -31,7 +35,9 @@ const b2bRequestWsdl = request => {
                     <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
                     <request xmlns="http://api-v1.gen.mm.vodafone.com/mminterface/request">
                         <Transaction>
-                            <CommandID>BusinessPayBill</CommandID><LanguageCode>0</LanguageCode><OriginatorConversationID>${originatorConversationId}</OriginatorConversationID><ConversationID></ConversationID>
+                            <CommandID>BusinessPayBill</CommandID><LanguageCode>0</LanguageCode>
+                            <OriginatorConversationID>${originatorConversationId}</OriginatorConversationID>
+                            <ConversationID>${convertationId}</ConversationID>
                             <Parameters>
                                 <Parameter><Key>Amount</Key><Value>${amount}</Value></Parameter>
                                 <Parameter><Key> AccountReference</Key><Value>${accountReference}</Value></Parameter>
