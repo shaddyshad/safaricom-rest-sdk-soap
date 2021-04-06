@@ -1,5 +1,6 @@
-const Id = require('../../id')
-const b2bRequestWsdl = (request) => {
+const id = require("../../id");
+
+const b2bRequestWsdl = request => {
     // required all
     const {
         SPID,
@@ -18,7 +19,7 @@ const b2bRequestWsdl = (request) => {
         securityCredentials,
         shortCode,
         recipient,
-        requesterPhoneNumber
+        requesterPhoneNumber,
     } = request;
     
     return (    `
