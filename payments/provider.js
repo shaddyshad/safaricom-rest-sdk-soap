@@ -1,4 +1,5 @@
-const requestWsdl = require('./wsdl/b2crequest')
+const requestB2CWsdl = require('./wsdl/b2crequest')
+const requestB2BWsdl = require('./wsdl/b2brequest')
 /**
  * Keeps constants needed to connect to service provider and provides it to all services
  * 
@@ -11,7 +12,7 @@ const requestWsdl = require('./wsdl/b2crequest')
  * + SECURITY_CREDENTIALS - encyrpted initiator service
  * +PAYMENTS_SERVICE_PASSWORD - service password
  */
-module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiatorPassword) => {
+module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiatorPassword, readCertFile) => {
     // get result url from environment
     const RESULT_URL = process.env.RESULT_URL;
     const PASSWORD = process.env.PAYMENTS_SERVICE_PASSWORD;
@@ -52,12 +53,15 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
     function getPassword(timestamp){
         return encodePassword(SPID, PASSWORD, timestamp)
     }
-
+    
     /***
+     * 
      * Get Initiator Password
      */
     function getInitiatorPassword(initiatorPassword){
-        return encodeInitiatorPassword(initiatorPassword)
+        const rootCertDirectory = '../certs/Root.crt';
+        const cert = readCertFile(rootCertDirectory);
+        return encodeInitiatorPassword(initiatorPassword,cert)
     }   
     /**
      * Sends a b2c request to the registered soap client
@@ -86,7 +90,7 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
 
         // compile into wsdl
         const compiled = {
-            xml: requestB2CWsdl(payload).replace(/\n|\r/g, "").trim(),
+            xml: requestB2BWsdl(payload).replace(/\n|\r/g, "").trim(),
         }
 
 
@@ -103,12 +107,13 @@ module.exports = (soapClient) => (getCurrentTime, encodePassword, encodeInitiato
 
 
         const timestamp = getCurrentTime();
-
         const payload = {
             timestamp,
             localTimestamp: timestamp,
             amount, 
             recipient,
+            accountReference: 'XXMKST',
+            password: CALLER_PASSWORD,
             timeoutUrl: QUEUE_TIMEOUT_URL,
             resultUrl: RESULT_URL,
             securityCredentials: SECURITY_CREDENTIALS,

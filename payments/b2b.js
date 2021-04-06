@@ -13,15 +13,10 @@ module.exports = (provider, originatorId) => {
      * @param {Object} request contains parameters needed to execute a b2b transaction
      */
     async function initiateB2B(request){
-        const {
-            recipientShortCode,
-            amount,
-        } = request;
-
+        
         return await provider.makeB2B({
-            recipientShortCode,
-            amount,
-            originatorConverationId: originatorId()
+            ...request,
+            originatorConversationId: originatorId()
         })
     }
 }
